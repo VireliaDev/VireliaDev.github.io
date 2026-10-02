@@ -1,0 +1,45 @@
+---
+layout: default
+---
+<article class="project">
+  <p class="back"><a href="{{ '/' | relative_url }}#projects">Back to all projects</a></p>
+
+  <h1>{{ page.title }}</h1>
+  <dl class="specs">
+    {% if page.status %}<div><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+    {% if page.players %}<div><dt>Players</dt><dd>{{ page.players }}</dd></div>{% endif %}
+    {% if page.engine %}<div><dt>Engine</dt><dd>{{ page.engine }}</dd></div>{% endif %}
+  </dl>
+  <p class="lede">{{ page.pitch }}</p>
+
+  {% if page.links and page.links.size > 0 %}
+    <ul class="buttons">
+      {% for link in page.links %}
+        <li><a class="button" href="{{ link.url }}">{{ link.label }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if page.image %}
+    <img class="shot" src="{{ page.image | relative_url }}" alt="Screenshot of {{ page.title }}">
+  {% endif %}
+
+  <div class="prose">{{ content }}</div>
+
+  <section class="devlog">
+    <h2>Devlog</h2>
+    {% assign project_posts = site.posts | where: "project", page.slug %}
+    {% if project_posts.size > 0 %}
+      <ol class="posts" reversed>
+        {% for post in project_posts %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %b %Y" }}</time>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p class="small">No devlogs yet.</p>
+    {% endif %}
+  </section>
+</article>

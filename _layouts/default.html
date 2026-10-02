@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: page.pitch | default: site.description }}">
+  <link rel="preload" href="{{ '/assets/fonts/pixelify-sans-latin-700-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-latin-400-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="top">
+    <a class="name" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="nav">
+      <a href="{{ '/' | relative_url }}#about">about</a>
+      <a href="{{ '/' | relative_url }}#projects">projects</a>
+    </nav>
+    <p class="net-graph" id="net-graph" aria-hidden="true" title="Real numbers from your browser. Type net_graph 0 in the console to hide.">
+      <span>fps <b data-fps>--</b></span>
+      <span>ping <b data-ping>--</b></span>
+    </p>
+  </header>
+
+  <main class="page">
+    {{ content }}
+  </main>
+
+  <footer class="bottom">
+    {% include links.html %}
+    <p class="small">
+      Built {{ site.time | date: "%-d %b %Y, %H:%M" }}.
+      <button class="console-hint" type="button" data-console-open>Press <kbd>`</kbd> for the console</button>
+    </p>
+  </footer>
+
+  <div class="console" id="console" hidden>
+    <div class="console-log" data-console-log role="log" aria-live="polite"></div>
+    <form class="console-line" data-console-form autocomplete="off">
+      <label for="console-input">]</label>
+      <input id="console-input" data-console-input spellcheck="false" aria-label="Console command">
+    </form>
+  </div>
+
+  <script type="application/json" id="site-data">
+    {
+      "about": {{ site.description | jsonify }},
+      "links": {{ site.links | jsonify }},
+      "projects": [{% assign projects = site.projects | sort: "order" %}{% for p in projects %}
+        {"slug": {{ p.slug | jsonify }}, "title": {{ p.title | jsonify }}, "status": {{ p.status | jsonify }}, "url": {{ p.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}
+      ]
+    }
+  </script>
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+</body>
+</html>

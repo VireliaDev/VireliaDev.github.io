@@ -1,0 +1,35 @@
+# Site settings — edit these
+title: Sidney Levin
+description: Gameplay programming portfolio
+url: "https://vireliadev.github.io"
+baseurl: ""
+
+# Contact links — leave a value empty ("") to hide it on the site
+links:
+  github: "https://github.com/VireliaDev"
+  linkedin: "https://linkedin.com/in/sidneylevin"
+  itch: "https://virelia.itch.io/"
+  discord: "virelia_"
+
+# Projects live in the _projects folder
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+permalink: /blog/:year/:month/:day/:title/
+markdown: kramdown
+exclude:
+  - README.md

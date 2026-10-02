@@ -1,0 +1,42 @@
+---
+layout: default
+title: Home
+---
+<section id="about" class="intro">
+  <h1>Hi, I'm Sidney.</h1>
+  <p>
+    I'm 19 and a first-year Computer Games Technology student at the University of Portsmouth.
+    I want to become a gameplay programmer at a large games studio, ideally working on multiplayer
+    games, since they're what I play and enjoy the most.
+  </p>
+  <p>Outside of programming, I'm into music and competitive gaming.</p>
+</section>
+
+<section id="projects" class="projects">
+  <h2>Projects</h2>
+  <table class="browser">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Status</th>
+        <th scope="col" class="opt">Players</th>
+        <th scope="col" class="opt">Engine</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% assign projects = site.projects | sort: "order" %}
+      {% for project in projects %}
+        <tr>
+          <td>
+            <a class="row-link" href="{{ project.url | relative_url }}">{{ project.title }}</a>
+            <span class="pitch">{{ project.pitch }}</span>
+          </td>
+          <td>{{ project.status | default: "-" }}</td>
+          <td class="opt">{{ project.players | default: "-" }}</td>
+          <td class="opt">{{ project.engine | default: "-" }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="small">{{ projects.size }} {% if projects.size == 1 %}project{% else %}projects{% endif %} listed. Click one to join.</p>
+</section>
