@@ -2,9 +2,9 @@
 title: Multiplayer Deathmatch Arena
 order: 1
 status: Pre-production
-players: "2–8"
+players: "2–6"
 engine: UE5 / C++ / GAS
-pitch: A fast-paced third-person deathmatch arena shooter for 2-8 players, built solo in Unreal Engine 5 with C++ and GAS. It demonstrates server-authoritative gameplay, with client-sided prediction and client-collected server-validated hit registration.
+pitch: A fast-paced third-person deathmatch arena shooter for 2-8 players, built in Unreal Engine 5 with C++ and GAS. It demonstrates server-authoritative gameplay, with client-sided prediction and client-collected server-validated hit registration.
 # image: /assets/images/mda.png   # uncomment once you have a screenshot
 links:
   - label: GitHub
